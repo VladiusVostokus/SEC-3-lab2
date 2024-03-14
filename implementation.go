@@ -4,8 +4,8 @@ import "fmt"
 
 // TODO: document this function.
 // PrefixToPostfix converts
-func CalculatePostfix(input string) (string, error) {
+func CalculatePostfix(input string) (int, error) {
 
 	arr := strings.Split(input)
-	return "TODO", fmt.Errorf("TODO")
+	return 0, fmt.Errorf("TODO")
 }
