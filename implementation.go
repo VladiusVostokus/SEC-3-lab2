@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"unicode"
 	"strconv"
-	"strings"
 )
 
 // TODO: document this function.
@@ -16,27 +15,32 @@ func CalculatePostfix(input string) (int, error) {
 	var res int
 
 	for _, v := range arr {
-		if unicode.IsNumber(v) {
-			num, _ := strconv.Atoi(v)
+		num, err := strconv.Atoi(v)
+		if err != nil {
+			var n1,n2 int
+			n2, nums = pop(nums)
+		    n1, nums = pop(nums)
+
+			switch v {
+			case "+":
+				res = n1 + n2
+			case "-":
+				res = n1 - n2
+			case "*":
+				res = n1 * n2
+			case "/":
+				res = n1 / n2
+			case "^":
+			default:
+				//error
+			}
+			nums = append(nums, res)
+		}
+		if err == nil {
 			nums = append(nums, num)
 		}
-		n1 := nums[0]
-		n2 := nums[1]
-		switch v {
-		case "+":
-			res = n1 + n2
-		case "-":
-			res = n1 - n2
-		case "*":
-			res = n1 * n2
-		case "/":
-			res = n1 / n2
-		case "^":
-		default:
-			//error
-		}
 	}
-	return res, fmt.Errorf("TODO")
+	return nums[0], fmt.Errorf("TODO")
 }
 
 func pop(stack []int) (int, []int) {
