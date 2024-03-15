@@ -1,11 +1,53 @@
 package lab2
 
-import "fmt"
+import (
+	"fmt"
+	"unicode"
+	"strconv"
+)
 
 // TODO: document this function.
 // PrefixToPostfix converts
 func CalculatePostfix(input string) (int, error) {
 
-	arr := strings.Split(input)
-	return 0, fmt.Errorf("TODO")
+	arr := strings.Split(input," ")
+	nums := make([]int, 0,3)
+	var res int
+
+	for _, v := range arr {
+		num, err := strconv.Atoi(v)
+		if err != nil {
+			var n1,n2 int
+			n2, nums = pop(nums)
+		    n1, nums = pop(nums)
+
+			switch v {
+			case "+":
+				res = n1 + n2
+			case "-":
+				res = n1 - n2
+			case "*":
+				res = n1 * n2
+			case "/":
+				res = n1 / n2
+			case "^":
+			default:
+				//error
+			}
+			nums = append(nums, res)
+		}
+		if err == nil {
+			nums = append(nums, num)
+		}
+	}
+	return nums[0], fmt.Errorf("TODO")
+}
+
+func pop(stack []int) (int, []int) {
+    if len(stack) == 0 {
+        return 0, stack
+    }
+    poppedElement := stack[len(stack)-1]
+    stack = stack[:len(stack)-1]
+    return poppedElement, stack
 }
