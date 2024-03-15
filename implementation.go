@@ -38,3 +38,12 @@ func CalculatePostfix(input string) (int, error) {
 	}
 	return res, fmt.Errorf("TODO")
 }
+
+func pop(stack []int) (int, []int) {
+    if len(stack) == 0 {
+        return 0, stack
+    }
+    poppedElement := stack[len(stack)-1]
+    stack = stack[:len(stack)-1]
+    return poppedElement, stack
+}
