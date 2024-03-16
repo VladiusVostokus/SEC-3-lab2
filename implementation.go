@@ -31,8 +31,9 @@ func CalculatePostfix(input string) (int, error) {
 			case "/":
 				res = n1 / n2
 			case "^":
+				res = power(n1, n2)
 			default:
-				//error
+				return -1, fmt.Errorf("Unsuitable symbol")
 			}
 			nums = append(nums, res)
 		}
@@ -40,7 +41,7 @@ func CalculatePostfix(input string) (int, error) {
 			nums = append(nums, num)
 		}
 	}
-	return nums[0], fmt.Errorf("TODO")
+	return nums[0], nil
 }
 
 func pop(stack []int) (int, []int) {
@@ -50,4 +51,12 @@ func pop(stack []int) (int, []int) {
     poppedElement := stack[len(stack)-1]
     stack = stack[:len(stack)-1]
     return poppedElement, stack
+}
+
+func power(a, b int) (int) {
+	x := 1
+	for i := 0; i < b ;i++ {
+		x *= a
+	}
+	return x
 }
