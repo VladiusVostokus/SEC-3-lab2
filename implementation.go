@@ -17,6 +17,11 @@ func CalculatePostfix(input string) (int, error) {
 	for _, v := range arr {
 		num, err := strconv.Atoi(v)
 		if err != nil {
+
+			if len(nums) < 2 {
+				return -1, fmt.Errorf("Incorrect postfix expression")
+			}
+			
 			var n1,n2 int
 			n2, nums = pop(nums)
 		    n1, nums = pop(nums)
