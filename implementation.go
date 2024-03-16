@@ -32,7 +32,7 @@ func CalculatePostfix(input string) (int, error) {
 				res = n1 / n2
 			case "^":
 			default:
-				//error
+				return -1, fmt.Errorf("Unsuitable symbol")
 			}
 			nums = append(nums, res)
 		}
@@ -40,7 +40,7 @@ func CalculatePostfix(input string) (int, error) {
 			nums = append(nums, num)
 		}
 	}
-	return nums[0], fmt.Errorf("TODO")
+	return nums[0], nil
 }
 
 func pop(stack []int) (int, []int) {
