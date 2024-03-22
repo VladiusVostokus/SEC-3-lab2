@@ -2,7 +2,7 @@ package lab2
 
 import (
 	"fmt"
-	"unicode"
+	"strings"
 	"strconv"
 )
 
