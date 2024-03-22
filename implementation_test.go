@@ -40,3 +40,7 @@ func (s *CalculatePostfixSuite) TestCalculatePostfixInsufficientOperands(c *C) {
 	_, err := CalculatePostfix("+")
 	c.Assert(err, NotNil)
 }
+func (s *CalculatePostfixSuite) TestCalculatePostfixSpaceExpression(c *C) {
+	_, err := CalculatePostfix(" ")
+	c.Assert(err, NotNil)
+}
