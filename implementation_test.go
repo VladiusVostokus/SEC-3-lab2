@@ -23,3 +23,8 @@ func (s *CalculatePostfixSuite) TestCalculatePostfixComplexExpression(c *C) {
 	c.Assert(err, IsNil)
 	c.Assert(result, Equals, 11)
 }
+func (s *CalculatePostfixSuite) TestCalculatePostfixComplexExpression2(c *C) {
+	result, err := CalculatePostfix("2 2 + 3 ^ 4 - 10 /")
+	c.Assert(err, IsNil)
+	c.Assert(result, Equals, 6)
+}
