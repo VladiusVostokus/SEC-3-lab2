@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	lab2 "lab2"
+	"os"
+	"strconv"
 )
 
 var (
@@ -27,4 +29,15 @@ func main() {
 	res, _ := lab2.CalculatePostfix(expression)
 	fmt.Println(res)
 	fmt.Println(file)
+	
+	if file != " " {
+		f, err := os.Create(file)
+		if err != nil {
+			panic(err)
+		}
+		_, err2 := f.WriteString(strconv.Itoa(res))
+		if err2 != nil {
+			panic(err)
+		}
+	}
 }
