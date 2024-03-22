@@ -36,3 +36,7 @@ func (s *CalculatePostfixSuite) TestCalculatePostfixInvalidSymbol(c *C) {
 	_, err := CalculatePostfix("4 2 $")
 	c.Assert(err, NotNil)
 }
+func (s *CalculatePostfixSuite) TestCalculatePostfixInsufficientOperands(c *C) {
+	_, err := CalculatePostfix("+")
+	c.Assert(err, NotNil)
+}
