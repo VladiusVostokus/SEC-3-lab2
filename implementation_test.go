@@ -1,6 +1,7 @@
 package lab2
 
 import (
+	"fmt"
 	. "gopkg.in/check.v1"
 	"testing"
 )
@@ -43,4 +44,11 @@ func (s *CalculatePostfixSuite) TestCalculatePostfixInsufficientOperands(c *C) {
 func (s *CalculatePostfixSuite) TestCalculatePostfixSpaceExpression(c *C) {
 	_, err := CalculatePostfix(" ")
 	c.Assert(err, NotNil)
+}
+func ExampleCalculatePostfix() {
+	res, _ := CalculatePostfix("2 2 +")
+	fmt.Println(res)
+
+	// Output:
+	// 4
 }
