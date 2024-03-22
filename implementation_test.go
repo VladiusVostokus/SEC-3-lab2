@@ -28,3 +28,7 @@ func (s *CalculatePostfixSuite) TestCalculatePostfixComplexExpression2(c *C) {
 	c.Assert(err, IsNil)
 	c.Assert(result, Equals, 6)
 }
+func (s *CalculatePostfixSuite) TestCalculatePostfixEmptyExpression(c *C) {
+	_, err := CalculatePostfix("")
+	c.Assert(err, NotNil)
+}
