@@ -8,7 +8,7 @@ import (
 
 var (
 	inputExpression = flag.String("e", "", "Expression to compute")
-	// TODO: Add other flags support for input and output configuration.
+	outputFile = flag.String("o", "", "File to output result")
 )
 
 func main() {
@@ -22,7 +22,9 @@ func main() {
 	//       }
 	//       err := handler.Compute()
 	expression := flag.Arg(0)
+	file := flag.Arg(2)
 
 	res, _ := lab2.CalculatePostfix(expression)
 	fmt.Println(res)
+	fmt.Println(file)
 }
