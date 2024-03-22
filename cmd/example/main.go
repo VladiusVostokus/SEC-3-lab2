@@ -21,7 +21,8 @@ func main() {
 	//           Output: {construct io.Writer according the command line parameters},
 	//       }
 	//       err := handler.Compute()
+	expression := flag.Arg(0)
 
-	res, _ := lab2.CalculatePostfix("+ 2 2")
+	res, _ := lab2.CalculatePostfix(expression)
 	fmt.Println(res)
 }
