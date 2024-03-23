@@ -17,7 +17,15 @@ import (
 
 func CalculatePostfix(input string) (int, error) {
 
-	arr := strings.Split(input," ")
+	trimedString := strings.Trim(input," ")
+	arr := strings.Split(trimedString," ")
+	lastElem := arr[len(arr)- 1]
+	_, err := strconv.Atoi(lastElem)
+
+	if err == nil {
+		return -1, fmt.Errorf("Incorrect postfix expression")
+	}
+	
 	nums := make([]int, 0,3)
 	var res int
 
