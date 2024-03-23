@@ -6,6 +6,7 @@ import (
 	lab2 "lab2"
 	"os"
 	"strconv"
+	//"ioutil"
 )
 /*
 var (
@@ -52,6 +53,7 @@ func main() {
 		}
 		barr := make([]byte, 5)
 		f.Read(barr)
+		f.Close()
 		res, _ := lab2.CalculatePostfix(string(barr))
 		fmt.Println(res)
 	}
