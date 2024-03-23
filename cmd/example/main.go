@@ -8,12 +8,6 @@ import (
 	"strconv"
 	"io/ioutil"
 )
-/*
-var (
-	inputExpression = flag.String("e", "", "Expression to compute")
-	inputFile = flag.String("f", "", "File with expression")
-	outputFile = flag.String("o", "", "File to output result")
-)*/
 
 var (
 	inputExpression string
@@ -53,16 +47,5 @@ func main() {
 		}
 		res, _ := lab2.CalculatePostfix(string(data))
 		fmt.Println(res)
-
-		/*
-		f, err := os.Open(inputFile)
-		if err != nil {
-			panic(err)
-		}
-		barr := make([]byte, 5)
-		f.Read(barr)
-		f.Close()
-		res, _ := lab2.CalculatePostfix(string(barr))
-		fmt.Println(res)*/
 	}
 }
