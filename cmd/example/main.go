@@ -6,7 +6,6 @@ import (
 	lab2 "lab2"
 	"os"
 	"strconv"
-	"io/ioutil"
 )
 
 var (
@@ -43,11 +42,26 @@ func main() {
 			panic(err)
 		}
 	} else {
-		data, err := ioutil.ReadFile(inputFile)
+		f, _ := os.Open(inputFile)
+		barr := make([]byte, 0, 1)
+		oneElemArr := make([]byte, 1)
+
+		for {
+			_, err := f.Read(oneElemArr)
+			if err != nil {
+				break
+			}
+			barr = append(barr, oneElemArr[0])
+		}
+		res, _ := lab2.CalculatePostfix(string(barr))
+		fmt.Println(res)
+		defer f.Close()
+		/*
+		data, err := os.ReadFile(inputFile)
 		if err != nil {
 			panic(err)
 		}
 		res, _ := lab2.CalculatePostfix(string(data))
-		fmt.Println(res)
+		fmt.Println(res) */
 	}
 }
