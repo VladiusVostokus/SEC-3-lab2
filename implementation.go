@@ -6,11 +6,26 @@ import (
 	"strconv"
 )
 
-// TODO: document this function.
-// PrefixToPostfix converts
+// CalculatePostfix
+// This function calculate the result of postfix expression
+// The program is passed a string as input
+// Than, program try to convert string to number and add it to slice
+// if program can't convert it, it checks if string is operator
+// if true, program get 2 numbers
+// and do calculation
+// and return the first element of slice as result
+
 func CalculatePostfix(input string) (int, error) {
 
-	arr := strings.Split(input," ")
+	trimedString := strings.Trim(input," ")
+	arr := strings.Split(trimedString," ")
+	lastElem := arr[len(arr)- 1]
+	_, err := strconv.Atoi(lastElem)
+
+	if err == nil {
+		return -1, fmt.Errorf("Incorrect postfix expression")
+	}
+	
 	nums := make([]int, 0,3)
 	var res int
 
