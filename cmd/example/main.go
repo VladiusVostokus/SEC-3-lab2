@@ -37,6 +37,8 @@ func main() {
 			panic(err)
 		}
 		_, err2 := f.WriteString(strconv.Itoa(res))
+		defer f.Close()
+		
 		if err2 != nil {
 			panic(err)
 		}
