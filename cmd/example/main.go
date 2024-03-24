@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	lab2 "lab2"
 	"os"
 	"strconv"
@@ -54,7 +53,9 @@ func main() {
 			barr = append(barr, oneElemArr[0])
 		}
 		res, _ := lab2.CalculatePostfix(string(barr))
-		fmt.Println(res)
+		output := strconv.Itoa(res)
+		os.Stdout.Write([]byte(output))
+		//fmt.Println(res)
 		defer f.Close()
 	}
 }
