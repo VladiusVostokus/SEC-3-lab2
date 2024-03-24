@@ -32,13 +32,15 @@ func main() {
 		res, _ := lab2.CalculatePostfix(inputExpression)
 		f, err := os.Create(outputFile)
 		if err != nil {
-			os.Stderr.WriteString(string(err.Error()))
+			outErr := string(err.Error())
+			os.Stderr.WriteString(outErr)
 		}
 		_, err2 := f.WriteString(strconv.Itoa(res))
 		defer f.Close()
 		
 		if err2 != nil {
-			os.Stderr.WriteString(string(err2.Error()))
+			outErr := string(err2.Error())
+			os.Stderr.WriteString(outErr)
 		}
 	} else {
 		f, _ := os.Open(inputFile)
@@ -54,7 +56,7 @@ func main() {
 		}
 		res, _ := lab2.CalculatePostfix(string(barr))
 		output := strconv.Itoa(res)
-		os.Stdout.Write([]byte(output))
+		os.Stdout.WriteString(output)
 		defer f.Close()
 	}
 }
