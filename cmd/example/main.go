@@ -56,12 +56,5 @@ func main() {
 		res, _ := lab2.CalculatePostfix(string(barr))
 		fmt.Println(res)
 		defer f.Close()
-		/*
-		data, err := os.ReadFile(inputFile)
-		if err != nil {
-			panic(err)
-		}
-		res, _ := lab2.CalculatePostfix(string(data))
-		fmt.Println(res) */
 	}
 }
