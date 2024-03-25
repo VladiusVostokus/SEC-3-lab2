@@ -35,35 +35,22 @@ func main() {
 		}
 	
 	if inputExpression == "" {
-
 		if inputFile == "" {
 			os.Stderr.WriteString("No expression to compute")
 			return
 		} else {
 			f, _ := os.Open(inputFile)
 			handler.Input = f
-			
-			handler.Compute()
-			/*
-
+		
 			if outputFile != "" {
-				f, err := os.Create(outputFile)
-
+				f2, err := os.Create(outputFile)
 				if err != nil {
 					outErr := string(err.Error())
 					os.Stderr.WriteString(outErr)
 				}
-				_, err2 := f.WriteString(strconv.Itoa(res))
-				defer f.Close()
-		
-				if err2 != nil {
-					outErr := string(err2.Error())
-					os.Stderr.WriteString(outErr)
-	    		}
-			} else {
-				output := strconv.Itoa(res)
-				os.Stdout.WriteString(output)
-			}*/
+				handler.Output = f2
+			}
+			handler.Compute()
 		}
 
 	} else {
