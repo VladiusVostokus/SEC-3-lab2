@@ -5,6 +5,7 @@ import (
 	lab2 "lab2"
 	"os"
 	"strconv"
+	"bytes"
 )
 
 var (
@@ -27,6 +28,11 @@ func main() {
 	//           Output: {construct io.Writer according the command line parameters},
 	//       }
 	//       err := handler.Compute()
+
+	handler := &lab2.ComputeHandler {
+		    Input: bytes.NewBufferString(inputExpression),
+		    Output: os.Stdout,
+		}
 	
 	if inputExpression == "" {
 
@@ -35,17 +41,10 @@ func main() {
 			return
 		} else {
 			f, _ := os.Open(inputFile)
-			barr := make([]byte, 0, 1)
-			oneElemArr := make([]byte, 1)
-
-			for {
-				_, err := f.Read(oneElemArr)
-				if err != nil {
-					break
-				}	
-				barr = append(barr, oneElemArr[0])
-			}
-			res, _ := lab2.CalculatePostfix(string(barr))
+			handler.Input = f
+			
+			handler.Compute()
+			/*
 
 			if outputFile != "" {
 				f, err := os.Create(outputFile)
@@ -64,7 +63,7 @@ func main() {
 			} else {
 				output := strconv.Itoa(res)
 				os.Stdout.WriteString(output)
-			}
+			}*/
 		}
 
 	} else {
@@ -98,37 +97,3 @@ func main() {
 		}
 	}	
 }
-
-/*
-if outputFile != "" {
-		res, _ := lab2.CalculatePostfix(inputExpression)
-		f, err := os.Create(outputFile)
-		if err != nil {
-			outErr := string(err.Error())
-			os.Stderr.WriteString(outErr)
-		}
-		_, err2 := f.WriteString(strconv.Itoa(res))
-		defer f.Close()
-		
-		if err2 != nil {
-			outErr := string(err2.Error())
-			os.Stderr.WriteString(outErr)
-	    }
-	} else {
-		f, _ := os.Open(inputFile)
-		barr := make([]byte, 0, 1)
-		oneElemArr := make([]byte, 1)
-
-		for {
-			_, err := f.Read(oneElemArr)
-			if err != nil {
-				break
-			}
-			barr = append(barr, oneElemArr[0])
-		}
-		res, _ := lab2.CalculatePostfix(string(barr))
-		output := strconv.Itoa(res)
-		os.Stdout.WriteString(output)
-		defer f.Close()
-	}
-*/

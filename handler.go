@@ -1,6 +1,10 @@
 package lab2
 
-import "strconv"
+
+import (
+	"io"
+	"strconv"
+)
 
 
 // ComputeHandler should be constructed with input io.Reader and output io.Writer.
@@ -11,14 +15,26 @@ type ComputeHandler struct {
 }
 
 func (ch *ComputeHandler) Compute() error {
-	reader := handler.Input
-	writer := handler.Output
-	res, err := CalculatePostfix()
-	if err != nil {
-		outErr := string(err.Error())
-		writer.WriteString(outErr)
-		return
+	
+	reader := ch.Input
+	writer := ch.Output
+	barr := make([]byte, 0, 1)
+	oneElemArr := make([]byte, 1)
+
+	for {
+		_, err := reader.Read(oneElemArr)
+		if err != nil {
+			break
+		}	
+		barr = append(barr, oneElemArr[0])
 	}
-	write.WriteString(strconv.Itoa(res))
+	res, err := CalculatePostfix(string(barr))
+
+	if err != nil {
+		return err
+	}
+	output := strconv.Itoa(res)
+	writer.Write([]byte(output))
+	
 	return nil
 }
