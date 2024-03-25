@@ -29,7 +29,12 @@ func main() {
 			os.Stderr.WriteString("No expression to compute")
 			return
 		} else {
-			f, _ := os.Open(inputFile)
+			f, err := os.Open(inputFile)
+			if err != nil {
+				os.Stderr.WriteString("Incorrect file to open")
+				return
+			}
+
 			handler.Input = f
 		
 			if outputFile != "" {
@@ -37,10 +42,16 @@ func main() {
 				if err != nil {
 					outErr := string(err.Error())
 					os.Stderr.WriteString(outErr)
+					return
 				}
 				handler.Output = f2
 			}
-			handler.Compute()
+			err = handler.Compute()
+			if err != nil {
+				outErr := string(err.Error())
+				os.Stderr.WriteString(outErr)
+				return
+			}
 		}
 	} else {
 
@@ -53,12 +64,26 @@ func main() {
 				if err != nil {
 					outErr := string(err.Error())
 					os.Stderr.WriteString(outErr)
+					return
 				}
 			handler.Output = f
-			handler.Compute()
+			err = handler.Compute()
+
+			if err != nil {
+				outErr := string(err.Error())
+				os.Stderr.WriteString(outErr)
+				return
+			}
+
 		} else {
-			handler.Compute()
+			err := handler.Compute()
+
+			if err != nil {
+				outErr := string(err.Error())
+				os.Stderr.WriteString(outErr)
+				return
+			}
 		}
-		
 	}	
 }
+
