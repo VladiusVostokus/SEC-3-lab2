@@ -1,29 +1,29 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	lab2 "lab2"
 	"os"
-	"bytes"
 )
 
 var (
 	inputExpression string
-	inputFile string
-	outputFile string
+	inputFile       string
+	outputFile      string
 )
 
 func main() {
 	flag.StringVar(&inputExpression, "e", "", "Expression to compute")
-	flag.StringVar(&inputFile, "f", "","File with expression")
+	flag.StringVar(&inputFile, "f", "", "File with expression")
 	flag.StringVar(&outputFile, "o", "", "File to output result")
 	flag.Parse()
 
-	handler := &lab2.ComputeHandler {
-		    Input: bytes.NewBufferString(inputExpression),
-		    Output: os.Stdout,
-		}
-	
+	handler := &lab2.ComputeHandler{
+		Input:  bytes.NewBufferString(inputExpression),
+		Output: os.Stdout,
+	}
+
 	if inputExpression == "" {
 		if inputFile == "" {
 			os.Stderr.WriteString("No expression to compute")
@@ -36,7 +36,7 @@ func main() {
 			}
 
 			handler.Input = f
-		
+
 			if outputFile != "" {
 				f2, err := os.Create(outputFile)
 				if err != nil {
@@ -61,11 +61,11 @@ func main() {
 		}
 		if outputFile != "" {
 			f, err := os.Create(outputFile)
-				if err != nil {
-					outErr := string(err.Error())
-					os.Stderr.WriteString(outErr)
-					return
-				}
+			if err != nil {
+				outErr := string(err.Error())
+				os.Stderr.WriteString(outErr)
+				return
+			}
 			handler.Output = f
 			err = handler.Compute()
 
@@ -84,6 +84,5 @@ func main() {
 				return
 			}
 		}
-	}	
+	}
 }
-
