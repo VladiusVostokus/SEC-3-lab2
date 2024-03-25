@@ -28,7 +28,79 @@ func main() {
 	//       }
 	//       err := handler.Compute()
 	
-	if outputFile != "" {
+	if inputExpression == "" {
+
+		if inputFile == "" {
+			os.Stderr.WriteString("No expression to compute")
+			return
+		} else {
+			f, _ := os.Open(inputFile)
+			barr := make([]byte, 0, 1)
+			oneElemArr := make([]byte, 1)
+
+			for {
+				_, err := f.Read(oneElemArr)
+				if err != nil {
+					break
+				}	
+				barr = append(barr, oneElemArr[0])
+			}
+			res, _ := lab2.CalculatePostfix(string(barr))
+
+			if outputFile != "" {
+				f, err := os.Create(outputFile)
+
+				if err != nil {
+					outErr := string(err.Error())
+					os.Stderr.WriteString(outErr)
+				}
+				_, err2 := f.WriteString(strconv.Itoa(res))
+				defer f.Close()
+		
+				if err2 != nil {
+					outErr := string(err2.Error())
+					os.Stderr.WriteString(outErr)
+	    		}
+			} else {
+				output := strconv.Itoa(res)
+				os.Stdout.WriteString(output)
+			}
+		}
+
+	} else {
+
+		if inputFile != "" {
+			os.Stderr.WriteString("Can not be 2 source of expression")
+			return
+		}
+
+		res, _ := lab2.CalculatePostfix(inputExpression)
+
+		if outputFile != "" {
+			f, err := os.Create(outputFile)
+			if err != nil {
+				outErr := string(err.Error())
+				os.Stderr.WriteString(outErr)
+			}
+
+			_, err2 := f.WriteString(strconv.Itoa(res))
+
+			defer f.Close()
+		
+			if err2 != nil {
+				outErr := string(err2.Error())
+				os.Stderr.WriteString(outErr)
+	    	}
+
+		} else {
+			output := strconv.Itoa(res)
+			os.Stdout.WriteString(output)
+		}
+	}	
+}
+
+/*
+if outputFile != "" {
 		res, _ := lab2.CalculatePostfix(inputExpression)
 		f, err := os.Create(outputFile)
 		if err != nil {
@@ -41,7 +113,7 @@ func main() {
 		if err2 != nil {
 			outErr := string(err2.Error())
 			os.Stderr.WriteString(outErr)
-		}
+	    }
 	} else {
 		f, _ := os.Open(inputFile)
 		barr := make([]byte, 0, 1)
@@ -59,4 +131,4 @@ func main() {
 		os.Stdout.WriteString(output)
 		defer f.Close()
 	}
-}
+*/
