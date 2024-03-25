@@ -4,6 +4,7 @@ package lab2
 import (
 	"io"
 	"strconv"
+	"bufio"
 )
 
 
@@ -16,19 +17,10 @@ type ComputeHandler struct {
 
 func (ch *ComputeHandler) Compute() error {
 	
-	reader := ch.Input
+	reader := bufio.NewReader(ch.Input)
 	writer := ch.Output
-	barr := make([]byte, 0, 1)
-	oneElemArr := make([]byte, 1)
-
-	for {
-		_, err := reader.Read(oneElemArr)
-		if err != nil {
-			break
-		}	
-		barr = append(barr, oneElemArr[0])
-	}
-	res, err := CalculatePostfix(string(barr))
+	expr, _ := reader.ReadString('\n')
+	res, err := CalculatePostfix(string(expr))
 
 	if err != nil {
 		return err
