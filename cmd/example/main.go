@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"flag"
-	lab2 "lab2"
+	lab2 "github.com/VladiusVostokus/SEC-3-lab2"
 	"os"
 )
 
