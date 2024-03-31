@@ -15,7 +15,7 @@ var _ = Suite(&CalculatePostfixSuite{})
 func (s *CalculatePostfixSuite) TestCalculatePostfixSimpleExpression(c *C) {
 	result, err := CalculatePostfix("4 2 -")
 	c.Assert(err, IsNil)
-	c.Assert(result, Equals, 2)
+	c.Assert(result, Equals, 10) //2
 }
 
 func (s *CalculatePostfixSuite) TestCalculatePostfixComplexExpression(c *C) {
